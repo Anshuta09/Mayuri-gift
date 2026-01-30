@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For Mayuri 💖</title>
+
+    <!-- FONTS -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,500&family=Sacramento&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        overflow: hidden;
+        background: linear-gradient(135deg, #ac2f5f, #e03479, #cb2a6a);
+        cursor: none;
+      }
+
+      .screen {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.96);
+      }
+
+      /* ---------- LOADING ---------- */
+      #loading h1 {
+        font-weight: 400;
+        color: #8a2c55;
+      }
+      .heart {
+        font-size: 5rem;
+        animation: beat 1s infinite;
+      }
+      @keyframes beat {
+        50% {
+          transform: scale(1.4);
+        }
+      }
+
+      /* ---------- GIFT ---------- */
+      #gift {
+        display: none;
+      }
+      .gift-box {
+        width: 200px;
+        height: 180px;
+        background: linear-gradient(135deg, #8b0038, #4a001f);
+        position: relative;
+        cursor: pointer;
+        animation: float 1.4s ease-in-out infinite;
+      }
+      @keyframes float {
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+      .ribbon {
+        position: absolute;
+        background: gold;
+      }
+      .v {
+        width: 30px;
+        height: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .h {
+        height: 30px;
+        width: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      /* ---------- MESSAGE ---------- */
+      #message {
+        display: none;
+        padding: 20px;
+      }
+
+      .photos {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 25px;
+      }
+
+      .photo {
+        width: 190px;
+        height: 250px;
+        background: #9d7373 center/cover no-repeat;
+        border-radius: 14px;
+        padding: 10px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+      }
+      .left {
+        transform: rotate(-4deg);
+      }
+      .right {
+        transform: rotate(3deg);
+      }
+
+      .message-box {
+        max-width: 700px;
+        background: rgba(255, 230, 240, 0.75);
+        backdrop-filter: blur(16px);
+        padding: 28px;
+        border-radius: 20px;
+        color: #7a2148;
+        font-size: 1.1rem;
+      }
+
+      .typed span {
+        border-right: 2px solid #7a2148;
+        animation: blink 1s infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .arrow {
+        font-size: 3rem;
+        margin-top: 22px;
+        cursor: pointer;
+        animation: bounce 1.2s infinite;
+        color: #a83261;
+      }
+      @keyframes bounce {
+        50% {
+          transform: translateY(12px);
+        }
+      }
+
+      /* ---------- VALENTINE ---------- */
+      #valentine {
+        display: none;
+      }
+      #valentine h1 {
+        color: #8a2c55;
+      }
+      .yes {
+        margin-top: 28px;
+        padding: 15px 48px;
+        font-size: 1.4rem;
+        background: #fff;
+        color: #b3004b;
+        border: none;
+        border-radius: 40px;
+        animation: pulse 1.4s infinite;
+        cursor: pointer;
+      }
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 rgba(255, 120, 170, 0.6);
+        }
+        50% {
+          box-shadow: 0 0 38px rgba(255, 120, 170, 1);
+        }
+        100% {
+          box-shadow: 0 0 0 rgba(255, 120, 170, 0.6);
+        }
+      }
+
+      /* ---------- FINAL ---------- */
+      #final {
+        display: none;
+        background: linear-gradient(135deg, #7762a0, #d7c7ff, #15073a);
+      }
+      .signature {
+        font-family: "Sacramento", cursive;
+        font-size: 3.4rem;
+        color: #872222;
+      }
+
+      /* ---------- CELEBRATION ---------- */
+      .burst {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        font-size: 2rem;
+        pointer-events: none;
+        animation: burst 1.6s ease-out forwards;
+      }
+      @keyframes burst {
+        0% {
+          transform: translate(-50%, -50%) scale(0.3);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y)))
+            scale(1.4);
+          opacity: 0;
+        }
+      }
+
+      /* ---------- CURSOR ---------- */
+      .spark {
+        position: fixed;
+        pointer-events: none;
+        font-size: 1.2rem;
+        animation: fade 1s forwards;
+      }
+      @keyframes fade {
+        to {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+      }
+
+      audio {
+        display: none;
+      }
+
+      @media (max-width: 600px) {
+        .photos {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- MUSIC -->
+    <audio id="bgm" src="Theycallthislove.mpeg" loop></audio>
+    <audio id="shutter" src="shutter.mp3"></audio>
+
+    <!-- LOADING -->
+    <div id="loading" class="screen" onclick="start()">
+      <h1>Just a moment…</h1>
+      <div class="heart">❤️</div>
+    </div>
+
+    <!-- GIFT -->
+    <div id="gift" class="screen hidden">
+      <div class="gift-box" onclick="openGift()">
+        <div class="ribbon v"></div>
+        <div class="ribbon h"></div>
+      </div>
+      <h2 style="color: #8a2c55">This is for you, Mayuri 💖</h2>
+    </div>
+
+    <!-- MESSAGE -->
+    <div id="message" class="screen hidden">
+      <div class="photos">
+        <div
+          class="photo left"
+          style="
+            background-image: url('WhatsApp\ Image\ 2026-01-30\ at\ 3.23.35\ PM.jpeg');
+          "
+        ></div>
+        <div
+          class="photo right"
+          style="
+            background-image: url('WhatsApp\ Image\ 2026-01-30\ at\ 3.23.35\ PM\ \(1\).jpeg');
+          "
+        ></div>
+      </div>
+
+      <div class="message-box">
+        <div id="typed" class="typed"></div>
+      </div>
+
+      <div class="arrow" onclick="toValentine()">⬇️</div>
+    </div>
+
+    <!-- VALENTINE -->
+    <div id="valentine" class="screen hidden">
+      <h1>Will you be my Valentine? 💖</h1>
+      <button class="yes" onclick="celebrate()">YES</button>
+    </div>
+
+    <!-- FINAL -->
+    <div id="final" class="screen hidden">
+      <div class="signature">A ♾️ M</div>
+      <p style="color: #fff">Forever — Ashuu & Mayuri</p>
+    </div>
+
+    <script>
+      const loading = document.getElementById("loading");
+      const gift = document.getElementById("gift");
+      const message = document.getElementById("message");
+      const valentine = document.getElementById("valentine");
+      const final = document.getElementById("final");
+      const bgm = document.getElementById("bgm");
+
+      const text =
+        "I love you very, very much Mayuri. You are my home, my peace, my forever. Thank you for being with me through everything. I will always choose you. — Yours forever, Ashuu 💖";
+
+      function start() {
+        bgm.volume = 0;
+        bgm.play();
+        let v = 0;
+        const fade = setInterval(() => {
+          v += 0.02;
+          bgm.volume = v;
+          if (v >= 0.6) clearInterval(fade);
+        }, 60);
+        loading.classList.add("hidden");
+        gift.style.display = "flex";
+        gift.classList.remove("hidden");
+      }
+
+      function openGift() {
+        gift.classList.add("hidden");
+        setTimeout(() => {
+          message.style.display = "flex";
+          message.classList.remove("hidden");
+          document.getElementById("shutter").play();
+          typeText();
+        }, 700);
+      }
+
+      function typeText() {
+        let i = 0;
+        const box = document.getElementById("typed");
+        const timer = setInterval(() => {
+          box.innerHTML = text.slice(0, i) + "<span></span>";
+          i++;
+          if (i > text.length) clearInterval(timer);
+        }, 45);
+      }
+
+      function toValentine() {
+        message.classList.add("hidden");
+        setTimeout(() => {
+          valentine.style.display = "flex";
+          valentine.classList.remove("hidden");
+        }, 600);
+      }
+
+      function celebrate() {
+        for (let i = 0; i < 40; i++) {
+          const b = document.createElement("div");
+          b.className = "burst";
+          b.innerHTML = ["💖", "🌸", "🎀", "💐"][Math.floor(Math.random() * 4)];
+          b.style.setProperty("--x", `${Math.random() * 400 - 200}px`);
+          b.style.setProperty("--y", `${Math.random() * 400 - 200}px`);
+          document.body.appendChild(b);
+          setTimeout(() => b.remove(), 1600);
+        }
+        valentine.classList.add("hidden");
+        setTimeout(() => {
+          final.style.display = "flex";
+          final.classList.remove("hidden");
+        }, 700);
+      }
+
+      // CURSOR SPARKLES
+      window.addEventListener("mousemove", (e) => {
+        const s = document.createElement("div");
+        s.className = "spark";
+        s.innerHTML = "✨";
+        s.style.left = e.clientX + "px";
+        s.style.top = e.clientY + "px";
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 1000);
+      });
+    </script>
+  </body>
+</html>
